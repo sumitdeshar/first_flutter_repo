@@ -1,0 +1,88 @@
+//import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+//shift alt F for formatting document use comma between two brackets
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String buttonName = "Click";
+  String buttonName1 = "Click";
+  int currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('App Tiltle'),
+        ),
+        body: Center(
+          child: currentIndex == 0
+              ? Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.lightGreenAccent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            onPrimary: Colors.white,
+                            primary: Colors.deepOrangeAccent,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              buttonName = 'Clicked on left';
+                            });
+                          },
+                          child: Text(buttonName)),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            onPrimary: Colors.white,
+                            primary: Colors.black,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              buttonName1 = 'Clicked on right';
+                            });
+                          },
+                          child: Text(buttonName1)),
+                    ],
+                  ),
+                )
+              : Image.asset('images/Landscape.jpg'),
+          // Image.network(''),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+                label: 'Home',
+                icon: Icon(Icons.home, color: Colors.green, size: 24.0)),
+            BottomNavigationBarItem(
+              label: 'Setting',
+              icon: Icon(Icons.settings, color: Colors.grey, size: 24.0),
+            ),
+          ],
+          currentIndex: currentIndex,
+          onTap: (int index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
